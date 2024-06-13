@@ -1,4 +1,4 @@
 ---
 # tasks file for providers
-- include_tasks: 10_create_host_provider.yml
-- include_tasks: 20_create_vmware_provider.yml
+- include_tasks: 10_create_source_provider.yml
+- include_tasks: 20_create_target_provider.yml
