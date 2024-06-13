@@ -5,4 +5,4 @@
     - rlopez.ocp_virt
 
   roles:
- - {role: rlopez.ocp_virt.validation}
+  - {role: rlopez.ocp_virt.validation}
