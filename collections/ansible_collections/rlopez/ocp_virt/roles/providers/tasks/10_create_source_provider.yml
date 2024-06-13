@@ -1,4 +1,4 @@
-- name: Deploy Provider resource
+- name: Deploy Source Provider resource
   kubernetes.core.k8s:
     state: present
     definition:

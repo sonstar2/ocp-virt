@@ -62,10 +62,10 @@
               id: "{{ portgroup_id }}"
         provider:
           destination:
-            name: host
+            name: "{{ target_provider_name }}"
             namespace: "{{ migration_namespace }}" # openshift-mtv
           source:
-            name: vmware
+            name: "{{ source_provider_name }}"
             namespace:  "{{ migration_namespace }}" #openshift-mtv
 
 - name: Build a list of all the datastores
