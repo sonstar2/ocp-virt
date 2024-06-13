@@ -6,3 +6,5 @@
 
   roles:
   - {role: rlopez.ocp_virt.validation}
+    vars:
+      cluster_name: "{{ vmware_cluster_name }}"
