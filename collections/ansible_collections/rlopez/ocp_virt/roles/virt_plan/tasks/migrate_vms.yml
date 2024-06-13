@@ -1,0 +1,16 @@
+---
+
+- name: Create a Migration manifest to run the Plan CR
+  kubernetes.core.k8s:
+    api_version: forklift.konveyor.io/v1beta1
+    kind: Migration
+    namespace: "{{ migration_namespace }}"
+    name: "{{ plan_name }}"
+    definition:
+      metadata:
+        name: "{{ plan_name }}"
+        namespace: "{{ migration_namespace }}"
+      spec:
+        plan:
+          name: "{{ plan_name }}"
+          namespace: "{{ migration_namespace }}"

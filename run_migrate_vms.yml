@@ -1,0 +1,11 @@
+---
+- name: Run Migration Plan
+  hosts: localhost
+  collections:
+    - rlopez.ocp_virt
+
+  tasks:
+    - name: Run migrate vms task
+      ansible.builtin.include_role:
+        name: rlopez.ocp_virt.virt_plan
+        tasks_from: migrate_vms.yml
