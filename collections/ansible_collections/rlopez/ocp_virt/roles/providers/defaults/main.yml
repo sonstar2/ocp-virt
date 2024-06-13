@@ -4,3 +4,5 @@
 provider_name: "vmware"
 provider_namespace: "openshift-mtv"
 vmware_credentials: "vmware-credentials"
+
+host_provider_name: "host"

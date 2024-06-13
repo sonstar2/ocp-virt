@@ -1,0 +1,13 @@
+- name: Deploy Host Provider resource
+  kubernetes.core.k8s:
+    state: present
+    definition:
+      apiVersion: forklift.konveyor.io/v1beta1
+      kind: Provider
+      metadata:
+        name: "{{ host_provider_name }}"
+        namespace: "{{ provider_namespace }}"
+      spec:
+        settings:
+        type: openshift
+
