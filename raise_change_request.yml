@@ -14,7 +14,7 @@
       short_description: "{{ cr_short_description }}"
       description: "{{ tower_user_name }} requests {{ user_selected_vm_names }} VMs to migrate"
       priority: high
-      risk: moderate
+      risk: low
       impact: low
       assignment_group: CAB Approval
       state: assess
