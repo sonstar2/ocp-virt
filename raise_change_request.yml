@@ -38,6 +38,10 @@
 
   - name: Wait for Change Request approval
     servicenow.itsm.change_request_info:
+      instance:
+        host: "{{ servicenow_hostname }}"
+        username: "{{ servicenow_username }}"
+        password: "{{ servicenow_password }}"
       number: "{{ request.record.number }}"
     until: change_request_status.records[0].state == "scheduled"
     retries: 50
