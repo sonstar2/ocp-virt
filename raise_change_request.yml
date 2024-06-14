@@ -14,16 +14,24 @@
       short_description: "{{ cr_short_description }}"
       description: "{{ tower_user_name }} requests {{ user_selected_vm_names }} VMs to migrate"
       priority: high
+      risk: moderate
       impact: low
-      assignment_group: 'CAB Approval'
+      assignment_group: CAB Approval
       state: assess
-      requested_by: "{{ tower_user_name }}"
+      # requested_by: "{{ tower_user_name }}"
     register: request
     until: request.changed is defined
     retries: 5
     delay: 5
     delegate_to: localhost
 
+  - name: Pass along request information
+    ansible.builtin.set_stats:
+      data:
+        request: "{{ request }}"
+      per_host: false
+    delegate_to: localhost
+    
   # - name: Send Approval e-mail
   #   community.general.mail:
   #     host: "{{ email_host }}"
@@ -66,5 +74,5 @@
         password: "{{ servicenow_password }}"
       state: implement
       number: "{{ request.record.number }}"
-      assignment_group: 'CAB Approval'
+      assignment_group: CAB Approval
     delegate_to: localhost
