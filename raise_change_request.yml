@@ -10,7 +10,7 @@
         username: "{{ servicenow_username }}"
         password: "{{ servicenow_password }}"
 
-      type: normal
+      type: standard
       short_description: "{{ cr_short_description }}"
       description: "{{ tower_user_name }} requests {{ user_selected_vm_names }} VMs to migrate"
       priority: high
