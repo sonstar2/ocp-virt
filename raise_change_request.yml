@@ -60,6 +60,10 @@
 
   - name: Update to implement the change request in ServiceNow
     servicenow.itsm.change_request:
+      instance:
+        host: "{{ servicenow_hostname }}"
+        username: "{{ servicenow_username }}"
+        password: "{{ servicenow_password }}"
       state: implement
       number: "{{ request.record.number }}"
       assignment_group: 'CAB Approval'
