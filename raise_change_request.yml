@@ -62,5 +62,5 @@
     servicenow.itsm.change_request:
       state: implement
       number: "{{ request.record.number }}"
-      assignment_group: VMware
+      assignment_group: 'CAB Approval'
     delegate_to: localhost
