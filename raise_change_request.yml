@@ -1,0 +1,26 @@
+---
+- name: Playbook for OpenShift Virt
+  hosts: localhost
+  tasks:
+
+  - name: Create change request
+    servicenow.itsm.change_request:
+      instance:
+        host: "{{ servicenow_hostname }}"
+        username: "{{ servicenow_username }}"
+        password: "{{ servicenow_password }}"
+
+      type: standard
+      state: new
+      requested_by: "{{ tower_user_name }}"
+      short_description: Start VMware Migration
+      description: Please approve for starting VMware Migration
+      # attachments:
+      #   - path: path/to/attachment.txt
+      priority: moderate
+      risk: low
+      impact: low
+
+      # other:
+      #   expected_start: 2021-02-12
+
