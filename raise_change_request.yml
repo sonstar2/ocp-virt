@@ -10,12 +10,12 @@
         username: "{{ servicenow_username }}"
         password: "{{ servicenow_password }}"
 
-      type: standard
+      type: normal
       short_description: "{{ cr_short_description }}"
       description: "{{ tower_user_name }} requests {{ user_selected_vm_names }} VMs to migrate"
       priority: high
       impact: low
-      assignment_group: VMware
+      assignment_group: 'CAB Approval'
       state: assess
       requested_by: "{{ tower_user_name }}"
     register: request
