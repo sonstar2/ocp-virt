@@ -12,7 +12,7 @@
 
       type: normal
       short_description: "{{ cr_short_description }}"
-      description: "{{ tower_user_name }} requests {{ vms_for_plan_spec }} VMs to migrate"
+      description: "{{ tower_user_name }} requests {{ user_selected_vm_names }} VMs to migrate"
       priority: high
       impact: low
       assignment_group: VMware
