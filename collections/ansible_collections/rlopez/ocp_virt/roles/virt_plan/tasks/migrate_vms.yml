@@ -26,5 +26,5 @@
       status: 'True'
       type: "Succeeded"
   vars:
-    rand_migration_name: "{{ lookup('community.general.random_string', length=5, min_numeric=1, special=false, uppser=false) }}"
+    rand_migration_name: "{{ lookup('community.general.random_string', length=5, min_numeric=1, special=false, upper=false) }}"
 
