@@ -9,3 +9,4 @@ servicenow_password: !vault |
           3638363630316637350a363333363338633465346363386131386338313763663239336264613366
           6439
 close_code: 'successful'
+close_notes: "Successfully migrated"

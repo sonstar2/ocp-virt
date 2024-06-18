@@ -22,5 +22,5 @@
       state: closed
       number: "{{ request.record.number }}"
       close_code: "{{ close_code }}"
-      close_notes: "{{ close_notes }}"
+      close_notes: "{{ user_selected_vm_names }} VM(s) have been migrated successfully!!"
     delegate_to: localhost
