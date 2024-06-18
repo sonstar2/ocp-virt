@@ -14,3 +14,7 @@
         plan:
           name: "{{ plan_name }}"
           namespace: "{{ migration_namespace }}"
+    wait: yes
+    wait_condition:
+      status: 'True'
+      type: "Succeeded"
