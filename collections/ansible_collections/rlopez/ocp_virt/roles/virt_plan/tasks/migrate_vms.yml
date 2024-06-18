@@ -1,4 +1,11 @@
 ---
+- name: Set migration name
+  set_fact:
+    rand_migration_name: lookup('community.general.random_string', length=5, min_numeric=1)
+
+- name: debug
+  debug:
+    msg: "{{ rand_migration_name }}"
 
 - name: Create a Migration manifest to run the Plan CR
   kubernetes.core.k8s:
