@@ -1,11 +1,11 @@
 ---
-- name: Set migration name
-  set_fact:
-    rand_migration_name: "{{ lookup('community.general.random_string', length=5, min_numeric=1) }}"
+# - name: Set migration name
+#   set_fact:
+#     rand_migration_name: "{{ lookup('community.general.random_string', length=5, min_numeric=1) }}"
 
-- name: debug
-  debug:
-    msg: "{{ rand_migration_name }}"
+# - name: debug
+#   debug:
+#     msg: "{{ rand_migration_name }}"
 
 - name: Create a Migration manifest to run the Plan CR
   kubernetes.core.k8s:
@@ -15,16 +15,16 @@
     name: "{{ plan_name }}-{{ rand_migration_name }}"
     definition:
       metadata:
-        name: "{{ plan_name }}"
+        name: "{{ plan_name }}-{{ rand_migration_name }}"
         namespace: "{{ migration_namespace }}"
       spec:
         plan:
-          name: "{{ plan_name }}"
+          name: "{{ plan_name }}-{{ rand_migration_name }}"
           namespace: "{{ migration_namespace }}"
     wait: yes
     wait_condition:
       status: 'True'
       type: "Succeeded"
   # vars:
-  #   rand_migration_name: lookup('community.general.random_string', length=5, min_numeric=1)
+    rand_migration_name: "{{ lookup('community.general.random_string', length=5, min_numeric=1, special=false, uppser=false) }}"
 
