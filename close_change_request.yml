@@ -24,3 +24,12 @@
       close_code: "{{ close_code }}"
       close_notes: "{{ user_selected_vm_names }} VM(s) have been migrated successfully!!"
     delegate_to: localhost
+
+  - name: Send notification message via Slack
+    community.general.slack:
+      token: "{{ slack_token }}"
+      msg: "Change has been closed successfully. Please check on this URL to review: <{{ servicenow_hostname }}/nav_to.do?uri=change_request.do?sysparm_query=number={{request.record.number }}>"
+      channel: '#{{slack_channel_name}}'
+      username: 'Ansible_VMware_Migration'
+      parse: 'none'
+    delegate_to: localhost
