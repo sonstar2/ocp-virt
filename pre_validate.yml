@@ -4,6 +4,11 @@
   collections:
     - rlopez.ocp_virt
 
+  pre_tasks:
+    - name: Get kubeconfig
+      debug: 
+        msg: "{{ lookup('ansible.builtin.env', 'KUBECONFIG') }}"
+
   roles:
     - role: rlopez.ocp_virt.validation
       vars:
