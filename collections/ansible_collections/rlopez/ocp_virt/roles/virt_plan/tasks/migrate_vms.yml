@@ -1,7 +1,7 @@
 ---
 - name: Set migration name
   set_fact:
-    rand_migration_name: lookup('community.general.random_string', length=5, min_numeric=1)
+    rand_migration_name: "{{ lookup('community.general.random_string', length=5, min_numeric=1) }}"
 
 - name: debug
   debug:
@@ -25,6 +25,6 @@
     wait_condition:
       status: 'True'
       type: "Succeeded"
-  vars:
-    rand_migration_name: lookup('community.general.random_string', length=5, min_numeric=1)
+  # vars:
+  #   rand_migration_name: lookup('community.general.random_string', length=5, min_numeric=1)
 
