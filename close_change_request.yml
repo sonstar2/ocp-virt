@@ -1,0 +1,26 @@
+---
+- name: Playbook for OpenShift Virt
+  hosts: localhost
+  tasks:
+
+  - name: Place a change request in ServiceNow in Review
+    servicenow.itsm.change_request:
+      instance:
+        host: "{{ servicenow_hostname }}"
+        username: "{{ servicenow_username }}"
+        password: "{{ servicenow_password }}"
+      state: review
+      number: "{{ request.record.number }}"
+    delegate_to: localhost
+
+  - name: Close a change request
+    servicenow.itsm.change_request:
+      instance:
+        host: "{{ servicenow_hostname }}"
+        username: "{{ servicenow_username }}"
+        password: "{{ servicenow_password }}"
+      state: closed
+      number: "{{ request.record.number }}"
+      close_code: "{{ close_code }}"
+      close_notes: "{{ close_notes }}"
+    delegate_to: localhost
