@@ -6,7 +6,7 @@
 
     - name: Debug
       debug:
-        var: hostvars[inventory_hostname]
+        var: hostvars[inventory_hostname].config
 
     - name: Set fact
       set_fact:
