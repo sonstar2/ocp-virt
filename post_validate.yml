@@ -12,7 +12,7 @@
       ansible.windows.win_ping:
       when: '"windows" in my_guestid'
       vars:
-        ansible_port: 5986
+        ansible_port: 5985
         ansible_connection: winrm
         ansible_user: Administrator
         ansible_password: "{{ target_password }}"
