@@ -1,6 +1,6 @@
 ---
 - name: Playbook for OpenShift Virt Post Migration Validation
-  hosts: all
+  hosts: namespace_vmimported
   gather_facts: false
   tasks:
 
