@@ -6,7 +6,7 @@
 
     - name: Set variable
       set_fact:
-        my_guestid: "{{ hostvars[inventory_hostname]['config.guestId' }}"
+        my_guestid: "{{ hostvars[inventory_hostname]['config.guestId'] }}"
 
     - name: Ping Test for Windows
       ansible.windows.win_ping:
