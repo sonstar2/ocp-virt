@@ -14,13 +14,21 @@
       vars:
         ansible_port: 5986
         ansible_connection: winrm
+        ansible_user: Administrator
+        ansible_password: "{{ target_password }}"
 
     - name: Ping Test for Linux
       ansible.builtin.ping:
       when: '"Linux" in my_guestid'
+      vars:
+        ansible_user: root
+        ansible_password: "{{ target_password }}"
 
     - name: Ping Test for CentOS
       ansible.builtin.ping:
       when: '"centos" in my_guestid'
+      vars:
+        ansible_user: root
+        ansible_password: "{{ target_password }}"
 
 
