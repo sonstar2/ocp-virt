@@ -1,34 +1,41 @@
 ---
 - name: Playbook for OpenShift Virt Post Migration Validation
-  hosts: namespace_vmimported
+  hosts: localhost
   gather_facts: false
   tasks:
 
-    - name: Set variable
-      set_fact:
-        my_guestid: "{{ hostvars[inventory_hostname]['config.guestId'] }}"
+    - name: Check Web Service
+      ansible.builtin.uri:
+        url: "{{ webapp_url }}"
+        return_content: true
+      register: result
+      failed_when: "'You are the visitor number' not in result.content"
 
-    - name: Ping Test for Windows
-      ansible.windows.win_ping:
-      when: '"windows" in my_guestid'
-      vars:
-        ansible_connection: winrm
-        ansible_user: Administrator
-        ansible_winrm_transport: basic
-        ansible_password: "{{ target_password }}"
+    # - name: Set variable
+    #   set_fact:
+    #     my_guestid: "{{ hostvars[inventory_hostname]['config.guestId'] }}"
 
-    - name: Ping Test for Linux
-      ansible.builtin.ping:
-      when: '"Linux" in my_guestid'
-      vars:
-        ansible_user: root
-        ansible_password: "{{ target_password }}"
+    # - name: Ping Test for Windows
+    #   ansible.windows.win_ping:
+    #   when: '"windows" in my_guestid'
+    #   vars:
+    #     ansible_connection: winrm
+    #     ansible_user: Administrator
+    #     ansible_winrm_transport: basic
+    #     ansible_password: "{{ target_password }}"
 
-    - name: Ping Test for CentOS
-      ansible.builtin.ping:
-      when: '"centos" in my_guestid'
-      vars:
-        ansible_user: root
-        ansible_password: "{{ target_password }}"
+    # - name: Ping Test for Linux
+    #   ansible.builtin.ping:
+    #   when: '"Linux" in my_guestid'
+    #   vars:
+    #     ansible_user: root
+    #     ansible_password: "{{ target_password }}"
+
+    # - name: Ping Test for CentOS
+    #   ansible.builtin.ping:
+    #   when: '"centos" in my_guestid'
+    #   vars:
+    #     ansible_user: root
+    #     ansible_password: "{{ target_password }}"
 
 
