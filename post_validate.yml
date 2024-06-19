@@ -14,7 +14,7 @@
 
     - name: Ping Test for Windows
       ansible.windows.win_ping:
-      when: '"windows" in my_hostvar.config.guestId
+      when: '"windows" in my_hostvar.config.guestId'
 
     - name: Ping Test for Linux
       ansible.builtin.ping:
