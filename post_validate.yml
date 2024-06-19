@@ -4,6 +4,10 @@
   gather_facts: false
   tasks:
 
+    - name: Debug
+      debug:
+        var: hostvars[inventory_hostname]
+        
     - name: Ping Test for Windows
       ansible.windows.win_ping:
       when: '"windows" in config.guestId'
