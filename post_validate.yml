@@ -7,15 +7,15 @@
     - name: Debug
       debug:
         var: hostvars[inventory_hostname]
-        
+
     - name: Ping Test for Windows
       ansible.windows.win_ping:
-      when: '"windows" in config.guestId'
+      when: '"windows" in hostvars[inventory_hostname].config.guestId'
 
     - name: Ping Test for Linux
       ansible.builtin.ping:
-      when: '"Linux" in config.guestId'
+      when: '"Linux" in hostvars[inventory_hostname].config.guestId'
 
     - name: Ping Test for CentOS
       ansible.builtin.ping:
-      when: '"centos" in config.guestId'
+      when: '"centos" in hostvars[inventory_hostname].config.guestId'
