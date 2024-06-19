@@ -14,12 +14,12 @@
 
     - name: Ping Test for Windows
       ansible.windows.win_ping:
-      when: '"windows" in my_hostvar.config.guestId'
+      when: '"windows" in config.guestId'
 
     - name: Ping Test for Linux
       ansible.builtin.ping:
-      when: '"Linux" in my_hostvar.config.guestId'
+      when: '"Linux" in config.guestId'
 
     - name: Ping Test for CentOS
       ansible.builtin.ping:
-      when: '"centos" in my_hostvar.config.guestId'
+      when: '"centos" in config.guestId'
