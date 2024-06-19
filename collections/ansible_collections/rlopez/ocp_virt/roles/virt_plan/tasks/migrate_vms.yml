@@ -25,6 +25,8 @@
     wait_condition:
       status: 'True'
       type: "Succeeded"
+    wait_sleep: 15
+    wait_timeout: 7200
   vars:
     rand_migration_name: "{{ lookup('community.general.random_string', length=5, min_numeric=1, special=false, upper=false) }}"
 
