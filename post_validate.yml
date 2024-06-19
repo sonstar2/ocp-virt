@@ -4,14 +4,18 @@
   gather_facts: false
   tasks:
 
+    - name: Set variable
+      set_fact:
+        my_guestid: "{{ hostvars[inventory_hostname]['config.guestId' }}"
+
     - name: Ping Test for Windows
       ansible.windows.win_ping:
-      when: '"windows" in hostvars[inventory_hostname]['config.guestId']'
+      when: '"windows" in my_guestid'
 
     - name: Ping Test for Linux
       ansible.builtin.ping:
-      when: '"Linux" in hostvars[inventory_hostname]['config.guestId']'
+      when: '"Linux" in my_guestid'
 
     - name: Ping Test for CentOS
       ansible.builtin.ping:
-      when: '"centos" in hostvars[inventory_hostname]['config.guestId']'
+      when: '"centos" in my_guestid'
