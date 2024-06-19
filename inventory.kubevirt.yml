@@ -2,4 +2,4 @@
 plugin: kubevirt.core.kubevirt
 connections:
   - use_service: False
-host_format: {name}
+host_format: "{name}"
