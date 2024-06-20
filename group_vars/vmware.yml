@@ -1,0 +1,3 @@
+---
+vmware_cluster_name: vcs-rs-00
+vmware_host: "vcsrs00-vc.infra.demo.redhat.com"
