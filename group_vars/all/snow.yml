@@ -10,3 +10,4 @@ servicenow_password: !vault |
           6439
 close_code: 'successful'
 close_notes: "Successfully migrated"
+cr_short_description: 'VMware Migration'
