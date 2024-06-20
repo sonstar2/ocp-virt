@@ -13,9 +13,7 @@
       type: normal
       short_description: "{{ cr_short_description }}"
       description: >-
-        "{{ tower_user_name }} requests {{ user_selected_vm_names }} VMs to migrate"
-        # {{ pre_validation_status }}
-        # {{ migration_plan_status }}
+        {{ tower_user_name }} requests {{ user_selected_vm_names }} VMs to migrate
       priority: high
       risk: low
       impact: low
