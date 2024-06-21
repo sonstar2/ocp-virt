@@ -4,12 +4,14 @@
   gather_facts: false
   tasks:
 
-    - name: Check Web Service
-      ansible.builtin.uri:
-        url: "{{ webapp_url }}"
-        return_content: true
-      register: result
-      failed_when: "'You are the visitor number' not in result.content"
+    - name: Post Validation Block
+      block:
+      - name: Check Web Service
+        ansible.builtin.uri:
+          url: "{{ webapp_url }}"
+          return_content: true
+        register: result
+        failed_when: "'You are the visitor number' not in result.content"
 
     # - name: Set variable
     #   set_fact:
@@ -37,5 +39,8 @@
     #   vars:
     #     ansible_user: root
     #     ansible_password: "{{ target_password }}"
-
+  rescue:
+    - name: Rescue for Failure
+      debug:
+        msg: "{{ result }} Demo has an issue atm!!"
 
