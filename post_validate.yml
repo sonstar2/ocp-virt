@@ -39,8 +39,8 @@
     #   vars:
     #     ansible_user: root
     #     ansible_password: "{{ target_password }}"
-  rescue:
-    - name: Rescue for Failure
-      debug:
-        msg: "{{ result }} Demo has an issue atm!!"
+      rescue:
+        - name: Rescue for Failure
+          debug:
+            msg: "{{ result }} Demo has an issue atm!!"
 
