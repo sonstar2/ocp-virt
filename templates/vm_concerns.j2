@@ -4,6 +4,9 @@ The following Concerns are identified
 Server Name: {{ vm.name }}
 Concerns:
 {% for cs in vm.concerns %}
-  {{ cs }}
+  Label: {{ cs.label }}
+  Category: {{ cs.category }}
+  Assessment: {{ cs.assessment }}
+  
 {% endfor %}
 {% endfor %}
