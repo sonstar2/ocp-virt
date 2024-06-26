@@ -1,0 +1,9 @@
+The following Concerns are identified
+========================================== 
+{% for vm in vms_concerns_report %}
+Server Name: {{ vm.name }}
+Concerns:
+{% for cs in vm.concerns %}
+  {{ cs }}
+{% endfor %}
+{% endfor %}

@@ -3,6 +3,10 @@
   hosts: localhost
   tasks:
 
+  - name: Set Concerns Message
+    ansible.builtin.set_fact:
+      concerns_message: "{{ lookup('ansible.builtin.template', 'templates/vm_concerns.j2') }}"
+
   - name: Create change request
     servicenow.itsm.change_request:
       instance:
@@ -14,8 +18,7 @@
       short_description: "{{ cr_short_description }}"
       description: >-
         {{ tower_user_name }} requests {{ user_selected_vm_names }} VMs to migrate
-        The following Concenrs are identified
-        {{ vms_concerns_report }}
+        {{ concerns_message | default('NA')}}
       priority: high
       risk: low
       impact: low
@@ -49,7 +52,9 @@
   - name: Send notification message via Slack
     community.general.slack:
       token: "{{ slack_token }}"
-      msg: "You have a new CR Approval request. Please click on this URL to approve: <{{ servicenow_hostname }}/nav_to.do?uri=change_request.do?sysparm_query=number={{request.record.number }}>"
+      msg: >-
+        You have a new CR Approval request. Please click on this URL to approve: <{{ servicenow_hostname }}/nav_to.do?uri=change_request.do?sysparm_query=number={{request.record.number }}>
+        {{ concerns_message }}
       channel: '#{{slack_channel_name}}'
       username: 'Ansible_VMware_Migration'
       parse: 'none'
