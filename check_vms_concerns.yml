@@ -1,0 +1,15 @@
+---
+- name: Playbook for Check VMs Concerns
+  hosts: localhost
+  tasks:
+
+  - name: Get Provider
+    ansible.builtin.uri:
+      url: "{{ openshift_mtv }}/providers/vsphere"
+      body_format: json
+      headers:
+        Content-Type: application/json
+        Authorization: "Bearer {{ openshift_token }}"
+    register: provider_result
+
+
