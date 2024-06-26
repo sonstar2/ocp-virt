@@ -7,9 +7,57 @@
     ansible.builtin.uri:
       url: "{{ openshift_mtv }}/providers/vsphere"
       body_format: json
+      status_code: 200
       headers:
         Content-Type: application/json
         Authorization: "Bearer {{ openshift_token }}"
     register: provider_result
 
+  - name: Get VMs
+    ansible.builtin.uri:
+      url: "{{ openshift_mtv }}/providers/vsphere/{{ provider_uid }}/vms"
+      body_format: json
+      status_code: 200
+      headers:
+        Content-Type: application/json
+        Authorization: "Bearer {{ openshift_token }}"
+    register: vms_result
+    vars:
+      provider_uid: "{{ provider_result.json[0].uid }}"
 
+  - name: Debug
+    debug: var=vms_result
+
+  - name: Filter VM workloads
+    ansible.builtin.set_fact:
+      workloads_vms: "{{ vms_result.json | selectattr('path', 'search', 'RS00/vm/Workloads') | list }}"
+
+  - name: Debug
+    debug: var=workloads_vms
+
+  - name: Loop VMs
+    ansible.builtin.uri:
+      url: "{{ openshift_mtv }}/{{ item.selfLink }}"
+      body_format: json
+      status_code: 200
+      headers:
+        Content-Type: application/json
+        Authorization: "Bearer {{ openshift_token }}"
+    register: vm_detail
+    loop: "{{ workloads_vms }}"
+
+  - name: Set VM names and Concerns
+    ansible.builtin.set_fact:
+      vm_name_concerns_pairs: "{{ vm_name_concerns_pairs | default([]) + [{'name': item.item.name, 'concerns': item.json.concerns}] }}"
+    loop: "{{ vm_detail.results }}"
+    when: item | length > 0
+
+  - name: Debug
+    debug: var=vm_name_concerns_pairs
+
+  - name: Pass along Concerns information
+    ansible.builtin.set_stats:
+      data:
+        vms_concerns_report: "{{ vm_name_concerns_pairs }}"
+      per_host: false
+    delegate_to: localhost
