@@ -1,0 +1,18 @@
+---
+- name: Playbook for Pre Patching Tasks
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: Pre Task Block
+      block:
+      - name: Ping Test for Linux
+        ansible.builtin.ping:
+
+      - name: Application Pre Task
+        include_tasks:
+          file: application_tasks/pre_task_{{ application_type | default('database') }}.yml
+
+      rescue:
+      - name: Rescue for Failure
+        debug:
+          msg: "{{ result }} Demo has an issue atm!!"
