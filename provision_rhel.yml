@@ -1,0 +1,9 @@
+---
+- name: Playbook for Provisioning RHEL VM
+  hosts: localhost
+  gather_facts: false
+  tasks:
+
+    - name: Provision RHEL VM on {{ environment }}
+      ansible.builtin.include_tasks:
+        file: provision_rhel_{{ environment | default('openshift') }}.yml
