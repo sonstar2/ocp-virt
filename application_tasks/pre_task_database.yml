@@ -2,4 +2,4 @@
 - name: Ensure database service stopped
   ansible.builtin.service:
     name: mysql
-  state: stopped
+    state: stopped
