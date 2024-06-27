@@ -6,6 +6,7 @@
   - name: Set Concerns Message
     ansible.builtin.set_fact:
       concerns_message: "{{ lookup('ansible.builtin.template', 'templates/vm_concerns.j2') }}"
+    when: vms_concerns_report is defined
 
   - name: Create change request
     servicenow.itsm.change_request:
