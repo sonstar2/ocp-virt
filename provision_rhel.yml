@@ -4,6 +4,6 @@
   gather_facts: false
   tasks:
 
-    - name: Provision RHEL VM on {{ environment }}
+    - name: Provision RHEL VM on {{ platform_environment }}
       ansible.builtin.include_tasks:
-        file: provision_rhel_{{ environment | default('openshift') }}.yml
+        file: provision_rhel_{{ platform_environment | default('openshift') }}.yml
