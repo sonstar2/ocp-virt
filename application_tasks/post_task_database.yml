@@ -1,6 +1,6 @@
 ---
 - name: Ensure database service running
   ansible.builtin.service:
-    name: mysql
+    name: mysqld
     state: started
 
