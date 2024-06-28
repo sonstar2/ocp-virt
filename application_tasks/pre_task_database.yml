@@ -1,9 +1,6 @@
 ---
 - name: Ensure database service stopped
-  ansible.builtin.command: systemctl stop mysqld
-
-
-# - name: Ensure database service stopped
-#   ansible.builtin.service:
-#     name: mysqld
-#     state: stopped
+  ansible.builtin.service:
+    name: mysqld
+    state: stopped
+  become: true

@@ -1,8 +1,6 @@
 ---
 - name: Ensure database service running
-  ansible.builtin.command: systemctl start mysqld
-
-# - name: Ensure database service running
-#   ansible.builtin.service:
-#     name: mysqld
-#     state: started
+  ansible.builtin.service:
+    name: mysqld
+    state: started
+  become: true
