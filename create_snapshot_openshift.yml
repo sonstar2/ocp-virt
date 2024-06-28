@@ -1,5 +1,5 @@
 ---
-- name: Create VM Snapshot
+- name: Create VM Snapshot on OpenShift Virtualization
   redhat.openshift.k8s:
     wait: true
     state: "{{ instance_state | default('present') }}"
