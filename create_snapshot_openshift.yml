@@ -1,0 +1,16 @@
+---
+- name: Create VM Snapshot
+  redhat.openshift.k8s:
+    wait: true
+    state: "{{ instance_state | default('present') }}"
+    definition:
+      apiVersion: snapshot.kubevirt.io/v1alpha1
+      kind: VirtualMachineSnapshot
+      metadata:
+        name: "snap_{{ vm_name }}"
+        namespace: "{{ vm_namespace }}"
+      spec:
+        source:
+          apiGroup: kubevirt.io
+          kind: VirtualMachine
+          name: "{{ vm_name }}"
