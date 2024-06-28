@@ -100,10 +100,24 @@
         host: "{{ servicenow_hostname }}"
         username: "{{ servicenow_username }}"
         password: "{{ servicenow_password }}"
+      state: scheduled
+      number: "{{ request.record.number }}"
+    delegate_to: localhost
+    when: 
+      - change_type is defined
+      - change_type == 'standard'
+
+  - name: Update to implement the change request in ServiceNow
+    servicenow.itsm.change_request:
+      instance:
+        host: "{{ servicenow_hostname }}"
+        username: "{{ servicenow_username }}"
+        password: "{{ servicenow_password }}"
       state: implement
       number: "{{ request.record.number }}"
       assignment_group: CAB Approval
     delegate_to: localhost
-    when: 
-      - change_type is defined
-      - change_type == 'normal'
+
+
+
+
