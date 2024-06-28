@@ -3,3 +3,4 @@
   ansible.builtin.service:
     name: mysqld
     state: stopped
+  become: true

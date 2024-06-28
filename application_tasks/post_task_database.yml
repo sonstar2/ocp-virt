@@ -3,4 +3,5 @@
   ansible.builtin.service:
     name: mysqld
     state: started
+  become: true
 
