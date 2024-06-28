@@ -11,6 +11,7 @@
       - name: Application Pre Task
         include_tasks:
           file: application_tasks/pre_task_{{ application_type | default('database') }}.yml
+        register: result
 
       rescue:
       - name: Rescue for Failure
