@@ -1,6 +1,10 @@
 ---
 - name: Ensure database service running
-  ansible.builtin.service:
+  ansible.builtin.systemd_service:
     name: mysqld
     state: started
 
+# - name: Ensure database service running
+#   ansible.builtin.service:
+#     name: mysqld
+#     state: started
