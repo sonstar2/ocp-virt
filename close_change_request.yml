@@ -28,7 +28,9 @@
   - name: Send notification message via Slack
     community.general.slack:
       token: "{{ slack_token }}"
-      msg: "Change has been closed successfully. Please check on this URL to review: <{{ servicenow_hostname }}/nav_to.do?uri=change_request.do?sysparm_query=number={{request.record.number }}>"
+      msg: >-
+        Change has been closed successfully. Please check on this URL to review: <{{ servicenow_hostname }}/nav_to.do?uri=change_request.do?sysparm_query=number={{request.record.number }}>
+        {{ change_close_additional_message | default('No Additional Detail') }}
       channel: '#{{slack_channel_name}}'
       username: 'Ansible_VMware_Migration'
       parse: 'none'
