@@ -8,7 +8,7 @@ spec:
   map:
 {% for value in all_the_datastores.value %}
     - destination:
-        storageClass: ocs-storagecluster-ceph-rbd
+        storageClass: "{{ default_storage_class }}"
       source:
         id: {{ value.datastore }}
 {% endfor %}

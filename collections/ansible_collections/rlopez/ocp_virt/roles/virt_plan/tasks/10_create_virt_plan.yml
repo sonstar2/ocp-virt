@@ -30,7 +30,7 @@
 
 - name: Prepare VMs for Plan spec
   ansible.builtin.set_fact:
-    vms_for_plan_spec: "{{ vms_for_plan_spec | default([]) + [{'hooks': [], 'id': vm_id.vm, 'name': vm_id.name}] }}"
+    vms_for_plan_spec: "{{ vms_for_plan_spec | default([]) + [{'hooks': [], 'id': vm_id.vm}] }}"
   loop: "{{ vm_name_id_pairs }}"
   loop_control:
     loop_var: vm_id
@@ -62,10 +62,10 @@
               id: "{{ portgroup_id }}"
         provider:
           destination:
-            name: "{{ target_provider_name }}"
+            name: host
             namespace: "{{ migration_namespace }}" # openshift-mtv
           source:
-            name: "{{ source_provider_name }}"
+            name: vmware
             namespace:  "{{ migration_namespace }}" #openshift-mtv
 
 - name: Build a list of all the datastores
@@ -98,6 +98,25 @@
 #           source:
 #             name: vmware
 #             namespace: "{{ migration_namespace }}"
+
+- name: Get storage class information
+  kubernetes.core.k8s_info:
+    api_version: storage.k8s.io/v1
+    kind: StorageClass
+  register: storage_classes
+
+- name: Find default storage class
+  set_fact:
+    default_storage_class: "{{ item.metadata.name }}"
+  loop: "{{ storage_classes.resources }}"
+  when:
+    - item.metadata.annotations is defined
+    - "'storageclass.kubernetes.io/is-default-class' in item.metadata.annotations"
+    - item.metadata.annotations['storageclass.kubernetes.io/is-default-class'] == 'true'
+
+- name: Print default storage class name
+  debug:
+    msg: "{{ default_storage_class }}"
 
 - name: Create or update a StorageMap
   kubernetes.core.k8s:
@@ -135,17 +154,17 @@
         vms: "{{ vms_for_plan_spec }}"
         warm: false
 
-# - name: Create a Migration manifest to run the Plan CR
-#   kubernetes.core.k8s:
-#     api_version: forklift.konveyor.io/v1beta1
-#     kind: Migration
-#     namespace: "{{ migration_namespace }}"
-#     name: "{{ plan_name }}"
-#     definition:
-#       metadata:
-#         name: "{{ plan_name }}"
-#         namespace: "{{ migration_namespace }}"
-#       spec:
-#         plan:
-#           name: "{{ plan_name }}"
-#           namespace: "{{ migration_namespace }}"
+- name: Create a Migration manifest to run the Plan CR
+  kubernetes.core.k8s:
+    api_version: forklift.konveyor.io/v1beta1
+    kind: Migration
+    namespace: "{{ migration_namespace }}"
+    name: "{{ plan_name }}"
+    definition:
+      metadata:
+        name: "{{ plan_name }}"
+        namespace: "{{ migration_namespace }}"
+      spec:
+        plan:
+          name: "{{ plan_name }}"
+          namespace: "{{ migration_namespace }}"
