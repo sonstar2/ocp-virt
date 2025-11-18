@@ -30,7 +30,7 @@
 
   - name: Filter VM workloads
     ansible.builtin.set_fact:
-      workloads_vms: "{{ vms_result.json | selectattr('path', 'search', 'RS00/vm/Workloads') | list }}"
+      workloads_vms: "{{ vms_result.json | selectattr('path', 'search', 'RS01/vm/Roadshow') | list }}"
 
   - name: Debug
     debug: var=workloads_vms
