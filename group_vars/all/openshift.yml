@@ -1,5 +1,5 @@
 # openshift_mtv: https://forklift-inventory-openshift-mtv.apps.jv5pc.dynamic.redhatworkshops.io
-openshift_mtv: https://forklift-inventory-openshift-mtv.apps.cluster-fkrcs-1.dynamic.redhatworkshops.io
+openshift_mtv: https://forklift-inventory-openshift-mtv.apps.cluster-2jj7q.dynamic.redhatworkshops.io
 openshift_token: !vault |
           $ANSIBLE_VAULT;1.1;AES256
           35323665616166656661316335383231306539666461333731333434616539326334383234656630
